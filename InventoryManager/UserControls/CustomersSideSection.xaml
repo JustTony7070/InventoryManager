@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="InventoryManager.UserControls.CustomersSideSection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InventoryManager.UserControls"
+             mc:Ignorable="d" 
+             d:Height="450" d:DesignWidth="266">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Key="NewValueSection">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="FontWeight" Value="Light"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="NewValueField">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="MaxLines" Value="3"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="{Binding B_ActionTitle,UpdateSourceTrigger=PropertyChanged,FallbackValue=ActionText}" 
+                   FontSize="25" FontWeight="Bold" HorizontalAlignment="Center"/>
+        
+        <!--#region Body-->
+        <Viewbox Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Orientation="Vertical" Margin="10">
+                <TextBlock Style="{StaticResource NewValueSection}" Text="Customer Name"/>
+                <TextBox Style="{StaticResource NewValueField}"
+                    Text="{Binding B_NewName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Style="{StaticResource NewValueSection}" Text="Products and Quantities"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <ListBox Width="270" Height="auto" MaxHeight="300" FontSize="16" 
+                             ItemsSource="{Binding B_Products_QuantitiesList}"
+                             HorizontalContentAlignment="Center" HorizontalAlignment="Stretch" 
+                             SelectedItem="{Binding B_PQListSelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="5,0,0,0">
+                        <Button Height="30" Width="30" Content="+" FontSize="16" Command="{Binding AddNewProductCommand}" Margin="0,0,0,5"/>
+                        <Button Height="30" Width="30" Content="-" FontSize="16" Command="{Binding RemoveSelectedProductCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Style="{StaticResource NewValueSection}" Text="Product" FontSize="13"/>
+                        <TextBox Style="{StaticResource NewValueField}" Width="145"
+                                 Text="{Binding B_NewProductToAdd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Margin="10,0,0,0">
+                        <TextBlock Style="{StaticResource NewValueSection}" Text="Quantity" FontSize="13"/>
+                        <TextBox Style="{StaticResource NewValueField}"  Width="145"
+                                 Text="{Binding B_NewQuantityToAdd,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                    </StackPanel>
+                </StackPanel>
+                <TextBlock Style="{StaticResource NewValueSection}" Text="Order Status" />
+                <ComboBox FontSize="16" SelectedIndex="{Binding B_OrderStatus,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,FallbackValue=0}" 
+                          HorizontalContentAlignment="Center">
+                    <ComboBoxItem Content="Pending" Foreground="Gray"/>
+                    <ComboBoxItem Content="Completed" Foreground="Green"/>
+                    <ComboBoxItem Content="Cancelled" Foreground="Red"/>
+                </ComboBox>
+                <TextBlock Style="{StaticResource NewValueSection}" Text="Code"/>
+                <TextBox Style="{StaticResource NewValueField}" x:Name="tbx_Code" MaxLength="10"
+                    Text="{Binding B_NewCode,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="AutoGenerate Unique Code" FontSize="16" Command="{Binding AutoGenerateCodeCommand}"/>
+            </StackPanel>
+        </Viewbox>
+        <!--#endregion-->
+
+        <!--#region Buttons-->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,30">
+            <Button Content="Confirm" Foreground="Green" Width="100" Height="50" FontSize="16" Command="{Binding ConfirmCommand}"/>
+            <Button Content="Cancel" Width="100" Height="50" FontSize="16" Margin="20,0,0,0" Command="{Binding CancelCommand}"/>
+        </StackPanel>
+        <!--#endregion-->
+    </Grid>
+</UserControl>
