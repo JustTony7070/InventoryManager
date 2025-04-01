@@ -22,8 +22,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height=".9*"/>
+            <RowDefinition Height=".1*"/>
         </Grid.RowDefinitions>
 
         <TextBlock Text="MySQL Login" FontWeight="Bold" FontSize="40" HorizontalAlignment="Center"/>
@@ -47,15 +47,23 @@
                     <TextBlock Text="Password"/>
                     <PasswordBox Width="200" Margin="0,20,0,0" HorizontalContentAlignment="Center" x:Name="Password"/>
                 </StackPanel>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,20,0,0">
+                    <CheckBox Content="Save Connection" Margin="0,0,0,10" IsChecked="{Binding B_SaveConnCheck}"/>
+                    <ComboBox ItemsSource="{Binding B_SqlConnectionsList}" SelectedItem="{Binding B_SqlConnListSelected}"/>
+                    <Button Content="Delete Selected" HorizontalAlignment="Center" FontSize="16" HorizontalContentAlignment="Center"
+                            Margin="0,10,0,0" Command="{Binding DeleteSelectedSqlConnCommand}"/>
+                </StackPanel>
             </StackPanel>
         </Viewbox>
         <!--#endregion-->
         
         <!--#region Buttons-->
-        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-            <Button Content="Confirm" Foreground="Green" Height="50" Width="100" FontSize="16" IsDefault="True" Click="Button_Click"/>
-            <Button Content="Cancel" Height="50" Width="100" FontSize="16" Margin="20,0,0,0" IsCancel="True"/>
-        </StackPanel>
+        <Viewbox Grid.Row="5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
+                <Button Content="Confirm" Foreground="Green" Height="50" Width="100" FontSize="16" IsDefault="True" Click="Button_Click"/>
+                <Button Content="Cancel" Height="50" Width="100" FontSize="16" Margin="20,0,0,0" IsCancel="True"/>
+            </StackPanel>
+        </Viewbox>
         <!--#endregion-->
     </Grid>
 </Window>
