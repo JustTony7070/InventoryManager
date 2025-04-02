@@ -1,8 +1,9 @@
-﻿using InventoryManager.Interfaces;
+﻿using InventoryManager.Classes;
+using InventoryManager.Interfaces;
 using InventoryManager.UtilitiesMetods;
 using System.Windows;
 
-namespace InventoryManager.Classes
+namespace InventoryManager.DataManagement
 {
     static class DataExporter
     {
@@ -17,7 +18,7 @@ namespace InventoryManager.Classes
                 if (string.IsNullOrEmpty(ExportPath)) return;
                 Enums.Databases database = list.First().GetType().Name == "Product" ? Enums.Databases.Products_Table
                     : Enums.Databases.Orders_Table;
-                string filePath = ExportPath + FileNameBase + database.ToString();
+                string filePath = ExportPath + FileNameBase + database.ToString() + ".csv";
                 switch (database)
                 {
                     case Enums.Databases.Products_Table:

@@ -9,9 +9,10 @@ namespace InventoryManager.UtilitiesMetods
     {
         public static void Write<T>(string FilePath, List<T> Records)
         {
+            string path = PathFixer(FilePath);
             try
             {
-                using StreamWriter writer = new(FilePath + ".csv");
+                using StreamWriter writer = new(path);
                 using CsvWriter csv = new(writer, CultureInfo.InvariantCulture);
                 csv.WriteRecords(Records);
             }
@@ -22,14 +23,16 @@ namespace InventoryManager.UtilitiesMetods
         }
         public static List<T> Load<T>(string Path, bool CreateIfNotExists = true)
         {
+            string path = PathFixer(Path);
+            Tools.Print(path);
             try
             {
-                if (!File.Exists(Path) && CreateIfNotExists)
+                if (!File.Exists(path) && CreateIfNotExists)
                 {
-                    File.Create(Path).Close();
+                    File.Create(path).Close();
                     return [];
                 }
-                using StreamReader reader = new(Path);
+                using StreamReader reader = new(path);
                 using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
                 return [.. csv.GetRecords<T>()];
             }
@@ -39,5 +42,6 @@ namespace InventoryManager.UtilitiesMetods
             }
             return [];
         }
+        private static string PathFixer(string Path) => Path.EndsWith(".csv") ? Path : Path + ".csv";
     }
 }

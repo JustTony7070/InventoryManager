@@ -22,9 +22,9 @@ namespace InventoryManager.DataManagement
             {
                 return IsDefaultFile ? LoadDataGeneric(FilePath + database + ".csv",database) : ChoosenFileBackup;
             }
-            catch (Exception ex)
+            catch
             {
-                System.Windows.MessageBox.Show("Error while loading data."+ex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                System.Windows.MessageBox.Show("Error while loading data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 return null;
             }
         }
@@ -54,7 +54,7 @@ namespace InventoryManager.DataManagement
             try
             {
                 if (list == null) return;
-                string path = FilePath + database;
+                string path = FilePath + database + ".csv";
                 switch (database)
                 {
                     case Enums.Databases.Products_Table:

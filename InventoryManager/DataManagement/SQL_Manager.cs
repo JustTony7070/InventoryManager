@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using InventoryManager.Classes;
+using InventoryManager.UtilitiesMetods;
 
 namespace InventoryManager.DataManagement
 {
@@ -7,6 +8,8 @@ namespace InventoryManager.DataManagement
     {
         private static MySqlConnection? Connection;
         public static SQL_Connection? LastConnection;
+        private static readonly string Path = AppDomain.CurrentDomain.BaseDirectory + "SQL_SavedConnections";
+        public static List<SQL_Connection> SavedConnections = EasyCsv.Load<SQL_Connection>(Path);
         public static void Connect(SQL_Connection sql_Connection)
         {
             string ConnectionString = $"Server={sql_Connection.Server};Database={sql_Connection.DbName};" +
@@ -65,5 +68,6 @@ namespace InventoryManager.DataManagement
         {
             Connection?.Close();
         }
+        public static void UpdateSavedConnectionsFile() => EasyCsv.Write(Path,SavedConnections);
     }
 }
