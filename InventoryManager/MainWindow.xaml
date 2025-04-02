@@ -17,7 +17,7 @@
         <!--#region Name-->
         <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center"
                    Text="Inventory Management" FontWeight="Bold" FontSize="40"/>
-        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="Version 4.0" FontSize="10" Margin="5,0,0,0" FontWeight="Light"/>
+        <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Left" Text="Version 4.5" FontSize="10" Margin="5,0,0,0" FontWeight="Light"/>
         <!--#endregion-->
         
         <!--#region ToolBar-->
