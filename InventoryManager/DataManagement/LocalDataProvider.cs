@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using InventoryManager.Classes;
 using InventoryManager.Interfaces;
+using InventoryManager.UtilitiesMetods;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
@@ -53,15 +54,14 @@ namespace InventoryManager.DataManagement
             try
             {
                 if (list == null) return;
-                using StreamWriter writer = new(FilePath + database + ".csv");
-                using CsvWriter csv = new(writer, CultureInfo.InvariantCulture);
+                string path = FilePath + database;
                 switch (database)
                 {
                     case Enums.Databases.Products_Table:
-                        csv.WriteRecords(list.Cast<Product>());
+                        EasyCsv.Write(path,[.. list.Cast<Product>()]);
                         break;
                     case Enums.Databases.Orders_Table:
-                        csv.WriteRecords(list.Cast<Order>());
+                        EasyCsv.Write(path, [.. list.Cast<Order>()]);
                         break;
                 }
             }
@@ -81,43 +81,21 @@ namespace InventoryManager.DataManagement
             };
             dialog.ShowDialog();
             if (string.IsNullOrEmpty(dialog.FileName)) return null;
-            try
-            {
-                Enums.Databases database = dialog.FileName.Contains(Enums.Databases.Products_Table.ToString()) ?
+            Enums.Databases database = dialog.FileName.Contains(Enums.Databases.Products_Table.ToString()) ?
                     Enums.Databases.Products_Table : Enums.Databases.Orders_Table;
-                IsDefaultFile = false;
-                ChoosenFileBackup = LoadDataGeneric(dialog.FileName, database);
-                return database;
-            }
-            catch
-            {
-                System.Windows.MessageBox.Show("Error while loading data.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                IsDefaultFile = true;
-            }
-            return null;
+            IsDefaultFile = false;
+            ChoosenFileBackup = LoadDataGeneric(dialog.FileName, database);
+            return database;
         }
 
         private static List<IData> LoadDataGeneric(string Path,Enums.Databases database)
         {
-            List<IData> list = [];
-            if (!File.Exists(Path) && IsDefaultFile)
-                File.Create(Path).Close();
-            using StreamReader reader = new(Path);
-            using CsvReader csv = new(reader, CultureInfo.InvariantCulture);
-            switch (database)
+            return database switch
             {
-                case Enums.Databases.Products_Table:
-                    var IIRecord = csv.GetRecords<Product>();
-                    foreach (var record in IIRecord)
-                        list.Add(record);
-                    break;
-                case Enums.Databases.Orders_Table:
-                    var OC_Record = csv.GetRecords<Order>();
-                    foreach (var record in OC_Record)
-                        list.Add(record);
-                    break;
-            }
-            return list;
+                Enums.Databases.Products_Table => [.. EasyCsv.Load<Product>(Path)],
+                Enums.Databases.Orders_Table => [.. EasyCsv.Load<Order>(Path)],
+                _ => [],
+            };
         } 
     }
 }
