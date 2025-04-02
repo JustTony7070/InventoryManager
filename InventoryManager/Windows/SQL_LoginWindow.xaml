@@ -60,7 +60,7 @@
         <!--#region Buttons-->
         <Viewbox Grid.Row="5">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,10">
-                <Button Content="Confirm" Foreground="Green" Height="50" Width="100" FontSize="16" IsDefault="True" Click="Button_Click"/>
+                <Button Content="Confirm" Foreground="Green" Height="50" Width="100" FontSize="16" IsDefault="True" Command="{Binding ConfirmCommand}"/>
                 <Button Content="Cancel" Height="50" Width="100" FontSize="16" Margin="20,0,0,0" IsCancel="True"/>
             </StackPanel>
         </Viewbox>

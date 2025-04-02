@@ -13,14 +13,14 @@ namespace InventoryManager.ViewModels
     internal class MainWindowViewModel : MainWindowVMComplement
     {
         #region RelayCommands
-        public RelayCommand ConnectCommand => new(execute => ConnectToSQLAction());
-        public RelayCommand NewCommand => new(execute => NewButtonAction());
-        public RelayCommand CancelCommand => new(execute => CancelButtonAction());
-        public RelayCommand ConfirmCommand => new(execute => ConfirmButtonAction());
-        public RelayCommand EditCommand => new(execute => EditButtonAction());
-        public RelayCommand DeleteCommand => new(execute => DeleteButtonAction());
-        public RelayCommand SearchCommand => new(execute => SearchAction());
-        public RelayCommand AutoGenerateCodeCommand => new(execute => B_NewCode = Tools.GenerateRandomString(10));
+        public RelayCommand ConnectCommand => new(ExecutionContext => ConnectToSQLAction());
+        public RelayCommand NewCommand => new(ExecutionContext => NewButtonAction());
+        public RelayCommand CancelCommand => new(ExecutionContext => CancelButtonAction());
+        public RelayCommand ConfirmCommand => new(ExecutionContext => ConfirmButtonAction());
+        public RelayCommand EditCommand => new(ExecutionContext => EditButtonAction());
+        public RelayCommand DeleteCommand => new(ExecutionContext => DeleteButtonAction());
+        public RelayCommand SearchCommand => new(ExecutionContext => SearchAction());
+        public RelayCommand AutoGenerateCodeCommand => new(ExecutionContext => B_NewCode = Tools.GenerateRandomString(10));
         public RelayCommand ExportDataCommand => new(ExecutionContext => ExportDataAction());
         public static RelayCommand SelectPathCommand => new(ExecutionContext => DataExporter.SelectExportPath());
         public RelayCommand LoadDataCommand => new(ExecutionContext => LoadDataAction());
