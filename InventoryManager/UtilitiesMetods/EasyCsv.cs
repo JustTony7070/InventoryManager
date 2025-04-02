@@ -24,7 +24,6 @@ namespace InventoryManager.UtilitiesMetods
         public static List<T> Load<T>(string Path, bool CreateIfNotExists = true)
         {
             string path = PathFixer(Path);
-            Tools.Print(path);
             try
             {
                 if (!File.Exists(path) && CreateIfNotExists)

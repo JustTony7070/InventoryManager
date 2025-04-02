@@ -9,7 +9,7 @@ namespace InventoryManager.ViewModels
     {
         #region RelayCommands
         public RelayCommand ConfirmCommand => new(ExecutionContext => ConfirmAction());
-        //public RelayCommand DeleteSelectedSqlConnCommand => new(ExecutionContext => );
+        public RelayCommand DeleteSelectedSqlConnCommand => new(ExecutionContext => DeleteSelectedConnectionAction());
         #endregion
 
         private readonly Window window;
@@ -26,7 +26,9 @@ namespace InventoryManager.ViewModels
             if (fields.All(string.IsNullOrEmpty)) return;
             SQL_Connection connection = new(B_tbServerIp, B_tbDbName, B_tbUserId, B_tbPassword);
             SQL_Manager.Connect(connection);
-            if (B_SaveConnCheck)
+            if (B_SaveConnCheck && !SQL_Manager.SavedConnections.Any(
+                conn => conn.Server == connection.Server && conn.DbName == connection.DbName && 
+                conn.UserID == connection.UserID))
             {
                 SQL_Manager.SavedConnections.Add(connection);
                 SQL_Manager.UpdateSavedConnectionsFile();
@@ -45,12 +47,38 @@ namespace InventoryManager.ViewModels
         }
         private void PopulateConnectionList()
         {
+            B_SqlConnectionsList.Clear();
             if (SQL_Manager.SavedConnections.Count > 0)
             {
                 foreach (SQL_Connection conn in SQL_Manager.SavedConnections)
                 {
                     B_SqlConnectionsList.Add($"{conn.Server}, {conn.DbName}, {conn.UserID}");
                 }
+            }
+        }
+        private void OnConnectionSelected()
+        {
+            if (B_SqlConnListSelected < 0) return;
+            SQL_Connection conn = SQL_Manager.SavedConnections[B_SqlConnListSelected];
+            B_tbServerIp = conn.Server;
+            B_tbDbName = conn.DbName;
+            B_tbUserId = conn.UserID;
+            B_tbPassword = conn.Password;
+            B_SaveConnCheck = false;
+        }
+        private void DeleteSelectedConnectionAction()
+        {
+            if (B_SqlConnListSelected >= 0)
+            {
+                SQL_Manager.SavedConnections.RemoveAt(B_SqlConnListSelected);
+                PopulateConnectionList();
+                SQL_Manager.UpdateSavedConnectionsFile();
+                B_SaveConnCheck = false;
+                B_SqlConnListSelected = -1;
+                B_tbServerIp = string.Empty;
+                B_tbDbName = string.Empty;
+                B_tbUserId = string.Empty;
+                B_tbPassword = string.Empty;
             }
         }
     }

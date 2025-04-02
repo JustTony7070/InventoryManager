@@ -1,8 +1,8 @@
 ﻿using InventoryManager.Classes;
+using InventoryManager.UtilitiesMetods;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows.Controls;
 
 namespace InventoryManager.ViewModels
 {
@@ -42,11 +42,14 @@ namespace InventoryManager.ViewModels
             get { return b_SaveConnCheck; }
             set { b_SaveConnCheck = value; OnPropertyChanged(); }
         }
-        private int b_SqlConnListSelected;
+        private int b_SqlConnListSelected = -1;
         public int B_SqlConnListSelected
         {
             get { return b_SqlConnListSelected; }
-            set { b_SqlConnListSelected = value; OnPropertyChanged(); }
+            set { b_SqlConnListSelected = value;
+                OnConnectionSelected();
+                OnPropertyChanged(); 
+            }
         }
         public ObservableCollection<string> B_SqlConnectionsList { get; set; } = [];
     }
