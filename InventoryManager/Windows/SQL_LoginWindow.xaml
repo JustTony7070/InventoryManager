@@ -33,19 +33,19 @@
             <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top">
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                     <TextBlock Text="Server IP"/>
-                    <TextBox x:Name="tb_Server"/>
+                    <TextBox x:Name="tb_Server" Text="{Binding B_tbServerIp,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Text="Database Name"/>
-                    <TextBox x:Name="tb_DbName"/>
+                    <TextBox x:Name="tb_DbName" Text="{Binding B_tbDbName,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Text="User ID"/>
-                    <TextBox x:Name="tb_UserID"/>
+                    <TextBox x:Name="tb_UserID" Text="{Binding B_tbUserId,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Center">
                     <TextBlock Text="Password"/>
-                    <PasswordBox Width="200" Margin="0,20,0,0" HorizontalContentAlignment="Center" x:Name="Password"/>
+                    <TextBox x:Name="tb_Password" Text="{Binding B_tbPassword,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" VerticalAlignment="Center" HorizontalAlignment="Stretch" Margin="0,20,0,0">
                     <CheckBox Content="Save Connection" Margin="0,0,0,10" IsChecked="{Binding B_SaveConnCheck}"/>

@@ -1,4 +1,5 @@
-﻿using InventoryManager.UserControls;
+﻿using InventoryManager.Classes;
+using InventoryManager.UserControls;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -6,9 +7,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace InventoryManager.Classes
+namespace InventoryManager.ViewModels
 {
-    class MainWindowVMComplement : INotifyPropertyChanged
+    partial class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
 

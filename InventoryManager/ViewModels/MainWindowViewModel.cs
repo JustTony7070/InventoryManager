@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace InventoryManager.ViewModels
 {
-    internal class MainWindowViewModel : MainWindowVMComplement
+    partial class MainWindowViewModel
     {
         #region RelayCommands
         public RelayCommand ConnectCommand => new(ExecutionContext => ConnectToSQLAction());
