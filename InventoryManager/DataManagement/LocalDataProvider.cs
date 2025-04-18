@@ -40,7 +40,7 @@ namespace InventoryManager.DataManagement
                 if (property != null)
                 {
                     string? value = property.GetValue(item)?.ToString();
-                    if (!string.IsNullOrEmpty(value) && value.StartsWith(Param, StringComparison.OrdinalIgnoreCase))
+                    if (!string.IsNullOrEmpty(value) && value.Contains(Param, StringComparison.OrdinalIgnoreCase))
                         list.Add(item);
                 }
             }
