@@ -67,6 +67,7 @@ namespace InventoryManager.DataManagement
         public static void Disconnect()
         {
             Connection?.Close();
+            Connection = null;
         }
         public static void UpdateSavedConnectionsFile() => EasyCsv.Write(Path,SavedConnections);
     }
