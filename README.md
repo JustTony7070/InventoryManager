@@ -2,19 +2,17 @@
 
 Applicazione desktop WPF per la gestione dell'inventario con supporto per database MySQL e archiviazione locale CSV.
 
-## Funzionalità
-
 ### Gestione Dati
 
-- **Prodotti**: ID, nome, quantità, prezzo, codice univoco (10 caratteri)
+- **Prodotti**: ID, nome, quantità, prezzo, codice univoco
 - **Ordini**: Nome cliente, prodotti con quantità, codice, stato
 - **Ricerca**: Filtri per tutti i campi con ricerca case-insensitive
 
 ### Modalità di Archiviazione
 
-- **MySQL**: Connessione con auto-sync ogni 3 secondi
+- **MySQL**: Connessione con auto-sync
 - **CSV Locale**: File di default o caricamento esterno
-- **Sincronizzazione**: Passaggio automatico tra modalità
+- **Sincronizzazione**: Switch automatico tra modalità
 
 ### Operazioni
 
