@@ -1,29 +1,29 @@
 # Inventory Manager
 
-Applicazione desktop WPF per la gestione dell'inventario con supporto per database MySQL e archiviazione locale CSV.
+WPF desktop application for inventory management with support for a MySQL database and local CSV storage.
 
-### Gestione Dati
+### Data Management
 
-- **Prodotti**: ID, nome, quantità, prezzo, codice univoco
-- **Ordini**: Nome cliente, prodotti con quantità, codice, stato
-- **Ricerca**: Filtri per tutti i campi con ricerca case-insensitive
+- **Products**: ID, name, quantity, price, unique code  
+- **Orders**: Customer name, products with quantities, code, status  
+- **Search**: Filters on all fields with case-insensitive search  
 
-### Modalità di Archiviazione
+### Storage Modes
 
-- **MySQL**: Connessione con auto-sync
-- **CSV Locale**: File di default o caricamento esterno
-- **Sincronizzazione**: Switch automatico tra modalità
+- **MySQL**: Connection with auto-sync  
+- **Local CSV**: Default file or external file loading  
+- **Synchronization**: Automatic switching between modes  
 
-### Operazioni
+### Operations
 
-- **CRUD**: Creazione, lettura, aggiornamento, eliminazione
-- **Validazione**: Controllo unicità codici, formato prezzi, campi obbligatori
-- **Export/Import**: Esportazione CSV e caricamento file esterni
-- **Backup**: Salvataggio automatico delle modifiche
+- **CRUD**: Create, read, update, delete  
+- **Validation**: Code uniqueness, price format, required fields  
+- **Export/Import**: CSV export and external file loading  
+- **Backup**: Automatic saving of changes  
 
-## Tecnologie
+## Technologies
 
-- **.NET 8.0** - Framework
-- **WPF** - Interfaccia utente
-- **MySQL.Data 9.2.0** - Connettore database
-- **CsvHelper 33.0.1** - Gestione CSV
+- **.NET 8.0** – Framework  
+- **WPF** – User interface  
+- **MySQL.Data 9.2.0** – Database connector  
+- **CsvHelper 33.0.1** – CSV handling  
